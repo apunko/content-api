@@ -3,7 +3,9 @@
 require 'test_helper'
 
 class SeasonTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'validates title, plot and number presence' do
+    season = Season.new
+    assert_not season.valid?
+    assert_equal %i[title plot number], season.errors.keys
+  end
 end
