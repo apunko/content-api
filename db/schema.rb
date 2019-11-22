@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,19 +12,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_144729) do
-
+ActiveRecord::Schema.define(version: 20_191_122_144_729) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "contents", force: :cascade do |t|
-    t.string "title"
-    t.text "plot"
-    t.integer "number"
-    t.string "type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["title", "number"], name: "index_contents_on_title_and_number", unique: true
+  create_table 'contents', force: :cascade do |t|
+    t.string 'title'
+    t.text 'plot'
+    t.integer 'number'
+    t.string 'type'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index %w[title number], name: 'index_contents_on_title_and_number', unique: true
   end
-
 end
