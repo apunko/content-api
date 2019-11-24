@@ -19,6 +19,12 @@ module API
         get api_v1_movies_path(page: Faker::Number.digit, format: :json)
         assert_response :success
       end
+
+      test 'returns content' do
+        create(:movie)
+        get api_v1_movies_path(page: 1, format: :json)
+        assert_equal 1, JSON.parse(response.body).dig('data').count
+      end
     end
   end
 end

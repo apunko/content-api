@@ -68,6 +68,11 @@ GEM
     concurrent-ruby (1.1.5)
     crass (1.0.5)
     erubi (1.9.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.1.1)
+      factory_bot (~> 5.1.0)
+      railties (>= 4.2.0)
     faker (2.7.0)
       i18n (>= 1.6, < 1.8)
     ffi (1.11.2)
@@ -225,6 +230,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  factory_bot_rails (= 5.1.1)
   faker (= 2.7.0)
   jbuilder (~> 2.7)
   kaminari (= 1.1.1)
