@@ -36,6 +36,7 @@ group :development, :test do
   gem 'faker', '2.7.0'
   gem 'overcommit', '0.51.0'
   gem 'pry', '~> 0.12.2'
+  gem 'rspec-rails', '3.9.0'
   gem 'rubocop', '~> 0.76.0', require: false
 end
 
