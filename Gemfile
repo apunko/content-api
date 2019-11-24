@@ -13,6 +13,8 @@ gem 'pg', '1.1.4'
 gem 'puma', '~> 4.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
+# Pagination
+gem 'kaminari', '1.1.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -30,6 +32,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker', '2.7.0'
   gem 'overcommit', '0.51.0'
   gem 'pry', '~> 0.12.2'
   gem 'rubocop', '~> 0.76.0', require: false

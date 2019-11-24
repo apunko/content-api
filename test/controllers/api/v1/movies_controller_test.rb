@@ -14,6 +14,11 @@ module API
         get api_v1_movies_path
         assert_response :not_acceptable
       end
+
+      test 'handles page param' do
+        get api_v1_movies_path(page: Faker::Number.digit, format: :json)
+        assert_response :success
+      end
     end
   end
 end

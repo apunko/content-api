@@ -4,7 +4,7 @@ module Api
   module V1
     class MoviesController < ApplicationController
       def index
-        @movies = Movie.all
+        @movies = Movie.page(params[:page])
       end
     end
   end
