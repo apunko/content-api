@@ -36,7 +36,9 @@ group :development, :test do
   gem 'faker', '2.7.0'
   gem 'overcommit', '0.51.0'
   gem 'pry', '~> 0.12.2'
-  gem 'rspec-rails', '3.9.0'
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
+  end
   gem 'rubocop', '~> 0.76.0', require: false
 end
 
