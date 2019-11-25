@@ -2,5 +2,9 @@
 
 FactoryBot.define do
   factory :episode do
+    season
+    title { Faker::Lorem.word }
+    plot { Faker::Lorem.sentence }
+    number { Faker::Number.digit }
   end
 end
