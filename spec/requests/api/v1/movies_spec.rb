@@ -47,7 +47,6 @@ RSpec.describe Api::V1::MoviesController, type: :request do
       let!(:movies) { create_list(:movie, Movie.default_per_page) }
 
       it 'returns ordered by creation result set' do
-        create_list(:movie, Movie.default_per_page)
         get api_v1_movies_path, params: { page: 1 }
 
         movies = JSON.parse(response.body).dig('data')
