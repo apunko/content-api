@@ -21,13 +21,46 @@ RSpec.describe Api::V1::MoviesController, type: :request do
 
     it 'handles page param' do
       get api_v1_movies_path, params: { page: Faker::Number.digit }
-      assert_response :success
+      expect(response).to have_http_status(:success)
     end
 
-    it 'returns content per page' do
-      create_list(:movie, Movie.default_per_page + 1)
-      get api_v1_movies_path, params: { page: 1 }
-      assert_equal Movie.default_per_page, JSON.parse(response.body).dig('data').count
+    describe 'paginator' do
+      let!(:movies) { create_list(:movie, Movie.default_per_page + 1) }
+
+      it 'returns content per page' do
+        get api_v1_movies_path, params: { page: 1 }
+        expect(JSON.parse(response.body).dig('data').count).to eq Movie.default_per_page
+      end
+
+      it 'could returns reduced page size for last page' do
+        get api_v1_movies_path, params: { page: 2 }
+        expect(JSON.parse(response.body).dig('data').count).to eq 1
+      end
+
+      it 'returns empty result set for page after last' do
+        get api_v1_movies_path, params: { page: 3 }
+        expect(JSON.parse(response.body).dig('data').count).to eq 0
+      end
+    end
+
+    describe 'default order' do
+      let!(:movies) { create_list(:movie, Movie.default_per_page) }
+
+      it 'returns ordered by creation result set' do
+        create_list(:movie, Movie.default_per_page)
+        get api_v1_movies_path, params: { page: 1 }
+
+        movies = JSON.parse(response.body).dig('data')
+        expect(movies.first['created_at']).to be > movies.last['created_at']
+      end
+
+      it 'the first on the first page is just added movie' do
+        movie = create(:movie)
+        get api_v1_movies_path, params: { page: 1 }
+
+        movies = JSON.parse(response.body).dig('data')
+        expect(movies.first['id']).to be movie.id
+      end
     end
   end
 end
