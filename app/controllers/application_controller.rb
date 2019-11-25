@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
   private
 
   def only_respond_to_json
-    head :not_acceptable unless params[:format] == 'json'
+    head :not_acceptable unless params[:format] == :json
   end
 end
