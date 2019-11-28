@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.shared_examples 'paginated_endpoint' do |base_model|
+RSpec.shared_examples 'paginated_content_endpoint' do |base_model|
   let(:base_model_factory) { base_model.name.downcase.to_sym }
   let(:default_per_page) { base_model.default_per_page }
   let(:path_helper_method_name) { "api_v1_#{base_model.name.pluralize.downcase}_path" }
@@ -25,6 +25,33 @@ RSpec.shared_examples 'paginated_endpoint' do |base_model|
   it 'handles page param' do
     get send(path_helper_method_name, params: { page: Faker::Number.digit })
     expect(response).to have_http_status(:success)
+  end
+
+  describe 'purchase_options attribute' do
+    it 'returns purchase_options' do
+      purchase_options_count = Faker::Number.digit
+      create(base_model_factory, purchase_options_count: purchase_options_count)
+      get send(path_helper_method_name)
+
+      purchase_options = JSON.parse(response.body).dig('data').first.dig('purchase_options')
+      expect(purchase_options.count).to eq purchase_options_count
+    end
+
+    it 'a purchase option contains id, quality, price attributes' do
+      create(base_model_factory, purchase_options_count: 1)
+      get send(path_helper_method_name)
+
+      purchase_option = JSON.parse(response.body).dig('data').first.dig('purchase_options').first
+      expect(purchase_option.keys.sort).to eq %w[id quality price].sort
+    end
+
+    it 'purchase option price is converted from cents' do
+      created_purchase_option = create(base_model_factory, purchase_options_count: 1).purchase_options.first
+      get send(path_helper_method_name)
+
+      purchase_option = JSON.parse(response.body).dig('data').first.dig('purchase_options').first
+      expect(purchase_option['price']).to eq created_purchase_option.price.to_f / 100
+    end
   end
 
   describe 'paginator' do

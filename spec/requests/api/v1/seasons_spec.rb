@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SeasonsController, type: :request do
   describe '#index' do
-    it_behaves_like 'paginated_endpoint', Season
+    it_behaves_like 'paginated_content_endpoint', Season
 
     it 'returns success on seasons with episodes' do
       create(:season_with_episodes)
@@ -18,7 +18,7 @@ RSpec.describe Api::V1::SeasonsController, type: :request do
       get api_v1_seasons_path
 
       season = JSON.parse(response.body).dig('data').first
-      expect(season.keys.sort).to eq %w[id title plot number created_at episodes].sort
+      expect(season.keys.sort).to eq %w[id title plot number created_at episodes purchase_options].sort
     end
 
     it 'returns empty collection for season without episodes' do

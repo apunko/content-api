@@ -4,7 +4,7 @@ module Api
   module V1
     class MoviesController < ApplicationController
       def index
-        @movies = Movie.ordered_by_creation.page(params[:page])
+        @movies = Movie.ordered_by_creation.includes(:purchase_options).page(params[:page])
       end
     end
   end

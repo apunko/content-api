@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ContentsController, type: :request do
   describe '#index' do
-    it_behaves_like 'paginated_endpoint', Content
+    it_behaves_like 'paginated_content_endpoint', Content
 
     it 'returns movies and seasons' do
       create(:movie)
