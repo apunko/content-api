@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :content do
-    title { Faker::Lorem.unique.word }
+    title { "#{Faker::Lorem.word}_#{Faker::Number.number(digits: 10)}" }
     plot  { Faker::Lorem.sentence }
-    type { Faker::Boolean.boolean ? 'Season' : 'Movie' }
+    type { %w[Season Movie].sample }
 
     after(:create) do |content, _|
       if content.type == 'Season'
