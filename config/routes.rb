@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :movies, only: [:index]
       resources :seasons, only: [:index]
+      resources :contents, only: [:index]
     end
   end
 end
