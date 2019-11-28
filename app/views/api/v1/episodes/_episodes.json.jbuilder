@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.array! episodes do |episode|
   json.id episode.id
   json.title episode.title
