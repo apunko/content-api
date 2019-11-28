@@ -8,13 +8,7 @@ json.data do
     json.number season.number
     json.created_at season.created_at
     json.episodes do
-      json.array! season.episodes do |episode|
-        json.id episode.id
-        json.title episode.title
-        json.plot episode.plot
-        json.number episode.number
-        json.created_at episode.created_at
-      end
+      json.partial! 'api/v1/episodes/episodes', episodes: season.episodes
     end
   end
 end

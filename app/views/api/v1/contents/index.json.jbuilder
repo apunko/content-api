@@ -10,13 +10,7 @@ json.data do
     json.created_at content.created_at
     if content.type == 'Season'
       json.episodes do
-        json.array! content.episodes do |episode|
-          json.id episode.id
-          json.title episode.title
-          json.plot episode.plot
-          json.number episode.number
-          json.created_at episode.created_at
-        end
+        json.partial! 'api/v1/episodes/episodes', episodes: content.episodes
       end
     end
   end
