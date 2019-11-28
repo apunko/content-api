@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Season, type: :model do
-  it 'is created' do
-    expect(create(:season).id).to_not be nil
+  it 'should be created' do
+    expect(create(:season).id).to be > 0
   end
 
   it 'validates title, plot and number presence' do
