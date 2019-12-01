@@ -76,7 +76,7 @@ RSpec.shared_examples 'paginated_content_endpoint' do |base_model|
   describe 'default order' do
     let!(:entities) { create_list(base_model_factory, default_per_page) }
 
-    it 'returns ordered by creation result set' do
+    it 'returns ordered by creation(desc) result set' do
       get send(path_helper_method_name, params: { page: 1 })
 
       entities = JSON.parse(response.body).dig('data')

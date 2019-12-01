@@ -6,7 +6,7 @@ module Api
       before_action :authenticate!
 
       def index
-        @purchases = @current_user.purchases.page(params[:page])
+        @purchases = Purchase.for_user_library(@current_user.id).page(params[:page])
       end
 
       private
