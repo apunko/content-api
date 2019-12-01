@@ -17,7 +17,7 @@ RSpec.shared_examples 'paginated_content_endpoint' do |base_model|
     expect(response).to have_http_status(:success)
   end
 
-  it ':not_acceptable on not jso format' do
+  it ':not_acceptable on not json format' do
     get send(path_helper_method_name, format: :html)
     expect(response).to have_http_status(:not_acceptable)
   end
@@ -55,7 +55,7 @@ RSpec.shared_examples 'paginated_content_endpoint' do |base_model|
   end
 
   describe 'paginator' do
-    before { create_list(base_model_factory, base_model.default_per_page + 1) }
+    before { create_list(base_model_factory, default_per_page + 1) }
 
     it 'returns content per page' do
       get send(path_helper_method_name, params: { page: 1 })
