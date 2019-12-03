@@ -98,6 +98,7 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
   config.before(:each) do
+    Rails.cache.clear
     Sidekiq::Worker.clear_all
   end
 end

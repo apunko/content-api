@@ -15,7 +15,10 @@ gem 'puma', '~> 4.1'
 gem 'jbuilder', '~> 2.7'
 # Pagination
 gem 'kaminari', '1.1.1'
+# background workers and jobs
 gem 'sidekiq', '6.0.3'
+# cache service
+gem 'redis-rails', '5.0.2'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

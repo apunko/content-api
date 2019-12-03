@@ -5,10 +5,11 @@ class Purchase < ApplicationRecord
 
   belongs_to :user
   belongs_to :purchase_option
-  belongs_to :content
+  belongs_to :content, touch: true
   has_many :episodes, through: :content
 
   after_create :schedule_expiration_job
+  after_save :invalidate_cache
 
   validates :user, presence: true
   validates :purchase_option, presence: true
@@ -25,5 +26,9 @@ class Purchase < ApplicationRecord
 
     job_id = PurchaseExpirationWorker.perform_in(WATCH_TIME, id)
     update(expiration_jid: job_id)
+  end
+
+  def invalidate_cache
+    Rails.cache.delete_matched("purchases_user_#{user_id}")
   end
 end

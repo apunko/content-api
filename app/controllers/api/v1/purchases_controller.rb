@@ -7,6 +7,11 @@ module Api
 
       def index
         @purchases = Purchase.for_user_library(@current_user.id).page(params[:page])
+        json = Rails.cache.fetch("purchases_user_#{@current_user.id}_page_#{params[:page]}", expires_in: 1.hour) do
+          render_to_string template: 'api/v1/purchases/index'
+        end
+
+        render json: json
       end
 
       def create

@@ -22,4 +22,21 @@ RSpec.describe Episode, type: :model do
   it 'validates number presence' do
     expect(build(:episode, number: nil).valid?).to be false
   end
+
+  it 'on update season updated_at is also updated' do
+    episode = create(:episode)
+    season = episode.season
+    season_updated_at = season.updated_at
+    episode.update(title: 'new')
+
+    expect(season_updated_at).to be < season.reload.updated_at
+  end
+
+  it 'on create season updated_at is also updated' do
+    season = create(:season)
+    season_updated_at = season.updated_at
+    create(:episode, season: season)
+
+    expect(season_updated_at).to be < season.reload.updated_at
+  end
 end
