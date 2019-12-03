@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_213843) do
+ActiveRecord::Schema.define(version: 2019_12_02_223906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,9 +47,12 @@ ActiveRecord::Schema.define(version: 2019_11_28_213843) do
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "purchase_option_id", null: false
+    t.boolean "expired", default: false, null: false
+    t.string "expiration_jid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["purchase_option_id"], name: "index_purchases_on_purchase_option_id"
+    t.index ["user_id", "purchase_option_id"], name: "index_purchases_on_user_id_and_purchase_option_id", unique: true, where: "(expired = false)"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 

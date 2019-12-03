@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :purchase do
     user
     purchase_option
+    expired { true }
   end
 end

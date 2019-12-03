@@ -113,6 +113,7 @@ GEM
     childprocess (3.0.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
+    connection_pool (2.2.2)
     crass (1.0.5)
     diff-lcs (1.3)
     erubi (1.9.0)
@@ -198,6 +199,8 @@ GEM
     puma (4.3.0-java)
       nio4r (~> 2.0)
     rack (2.0.7)
+    rack-protection (2.0.7)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.1)
@@ -231,6 +234,10 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redis (4.1.3)
+    rspec-sidekiq (3.0.3)
+      rspec-core (~> 3.0, >= 3.0.0)
+      sidekiq (>= 2.4.0)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -240,6 +247,11 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
+    sidekiq (6.0.3)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     spoon (0.0.6)
       ffi
     spring (2.1.0)
@@ -292,8 +304,10 @@ DEPENDENCIES
   rspec-expectations!
   rspec-mocks!
   rspec-rails!
+  rspec-sidekiq
   rspec-support!
   rubocop (~> 0.76.0)
+  sidekiq (= 6.0.3)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

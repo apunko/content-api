@@ -15,6 +15,7 @@ gem 'puma', '~> 4.1'
 gem 'jbuilder', '~> 2.7'
 # Pagination
 gem 'kaminari', '1.1.1'
+gem 'sidekiq', '6.0.3'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -40,6 +41,10 @@ group :development, :test do
     gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
   end
   gem 'rubocop', '~> 0.76.0', require: false
+end
+
+group :test do
+  gem 'rspec-sidekiq'
 end
 
 group :development do
