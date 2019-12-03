@@ -13,8 +13,6 @@ class Purchase < ApplicationRecord
   validates :user, presence: true
   validates :purchase_option, presence: true
 
-  scope :active, -> { where(created_at: WATCH_TIME.ago..DateTime.now.utc) }
-
   scope :for_user_library, lambda { |user_id|
     where(user_id: user_id, created_at: WATCH_TIME.ago..DateTime.now.utc).includes(:content, :episodes)
   }
