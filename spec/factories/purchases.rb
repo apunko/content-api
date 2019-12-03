@@ -3,7 +3,10 @@
 FactoryBot.define do
   factory :purchase do
     user
-    purchase_option
-    expired { true }
+    content
+    expired { false }
+    after(:build) do |purchase|
+      purchase.purchase_option = create(:purchase_option, content: purchase.content)
+    end
   end
 end

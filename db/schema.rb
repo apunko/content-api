@@ -46,13 +46,15 @@ ActiveRecord::Schema.define(version: 2019_12_02_223906) do
 
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "content_id", null: false
     t.bigint "purchase_option_id", null: false
     t.boolean "expired", default: false, null: false
     t.string "expiration_jid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["content_id"], name: "index_purchases_on_content_id"
     t.index ["purchase_option_id"], name: "index_purchases_on_purchase_option_id"
-    t.index ["user_id", "purchase_option_id"], name: "index_purchases_on_user_id_and_purchase_option_id", unique: true, where: "(expired = false)"
+    t.index ["user_id", "content_id"], name: "index_purchases_on_user_id_and_content_id", unique: true, where: "(expired = false)"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_223906) do
 
   add_foreign_key "episodes", "contents"
   add_foreign_key "purchase_options", "contents"
+  add_foreign_key "purchases", "contents"
   add_foreign_key "purchases", "purchase_options"
   add_foreign_key "purchases", "users"
 end

@@ -55,25 +55,25 @@ RSpec.describe Api::V1::PurchasesController, type: :request do
     describe 'order' do
       let!(:user) { create(:user_with_purchases, purchases_count: Purchase.default_per_page) }
 
-      it 'returns purchases ordered by creation(asc)' do
+      it 'returns purchases ordered by remaining time to watch' do
         get api_v1_purchases_path, params: { user_id: user.id, page: 1 }
 
         purchases = JSON.parse(response.body).dig('data')
-        expect(purchases.first['created_at']).to be < purchases.last['created_at']
+        expect(purchases.first['created_at']).to be <= purchases.last['created_at']
       end
     end
 
-    describe 'watch time restriction' do
-      let!(:user) { create(:user_with_purchases, purchases_count: 1) }
+    describe 'expired restriction' do
+      let!(:user) { create(:user_with_purchases, purchases_count: 5) }
 
-      it 'returns only active purchases' do
+      it 'returns only not expired purchases' do
         get api_v1_purchases_path, params: { user_id: user.id, page: 1 }
-        expect(JSON.parse(response.body).dig('data').count).to eq 1
+        expect(JSON.parse(response.body).dig('data').count).to eq 5
 
-        travel Purchase::WATCH_TIME + 1.second do
-          get api_v1_purchases_path, params: { user_id: user.id, page: 1 }
-          expect(JSON.parse(response.body).dig('data').count).to eq 0
-        end
+        user.purchases.update(expired: true)
+
+        get api_v1_purchases_path, params: { user_id: user.id, page: 1 }
+        expect(JSON.parse(response.body).dig('data').count).to eq 0
       end
     end
 

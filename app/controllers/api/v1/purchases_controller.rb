@@ -11,6 +11,7 @@ module Api
 
       def create
         @purchase = @current_user.purchases.build(create_params)
+        @purchase.content = @purchase.purchase_option.content if @purchase.purchase_option
 
         if @purchase.save
           render @purchase, status: :created
