@@ -1,24 +1,30 @@
-# README
+# Content API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A basic implementation of json api. Without production purposes. Just for training.
 
-Things you may want to cover:
+## Development env setup
 
-* Ruby version
+Standard steps for rails app
+* ```bundle install```
+* ```rails db:create; rails db:migrate```
 
-* System dependencies
+Optional:
 
-* Configuration
+Set up [Overcommit](https://github.com/sds/overcommit/)
+to run [Rubocop](https://github.com/rubocop-hq/rubocop) before commits and tests before push. I use it for convenience. 
 
-* Database creation
+Overcommit is base on git hooks.
 
-* Database initialization
+## Development Server
 
-* How to run the test suite
+```rails s``` and in a separate tab ```bundle exec sidekiq```
 
-* Services (job queues, cache servers, search engines, etc.)
+Caching is disabled in dev environment. Modify  ```config/environments/development.rb``` to get it running.
 
-* Deployment instructions
+## Tests
 
-* ...
+[Rspec](https://github.com/rspec/rspec-rails/) is testing framework.
+
+[FactoryBot](https://github.com/thoughtbot/factory_bot/) - factories (fixture replacement). 
+
+Run tests ```rspec spec```
