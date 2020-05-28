@@ -14,7 +14,7 @@ gem 'puma', '~> 4.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Pagination
-gem 'kaminari', '1.1.1'
+gem 'kaminari', '1.2.1'
 # background workers and jobs
 gem 'sidekiq', '6.0.3'
 # cache service
