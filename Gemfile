@@ -16,7 +16,7 @@ gem 'jbuilder', '~> 2.7'
 # Pagination
 gem 'kaminari', '1.1.1'
 # background workers and jobs
-gem 'sidekiq', '6.0.3'
+gem 'sidekiq', '6.4.0'
 # cache service
 gem 'redis-rails', '5.0.2'
 # Use Redis adapter to run Action Cable in production
